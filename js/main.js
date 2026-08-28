@@ -1,10 +1,11 @@
 // ==========================================================================
 // CONVITE INTERATIVO - 80 ANOS DE EDILEUZA (MOTION GRAPHICS UX)
-// Lógica de Abertura Vetorial, Confirmação Direta (GitHub Pages & Sheets)
+// Lógica de Abertura Vetorial, Links Personalizados e Toggles Dinâmicos
 // ==========================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
     initConfigData();
+    initPersonalizedUrlParams();
     startCountdown();
     setupMobileUXEventListeners();
 });
@@ -48,7 +49,70 @@ function initConfigData() {
 }
 
 // --------------------------------------------------------------------------
-// 2. Contador Regressivo para 27/09/2026
+// 2. Processador de Links Personalizados (?nome=João&c=vd)
+// --------------------------------------------------------------------------
+function parsePassesToken(rawToken) {
+    if (!rawToken) return 4;
+    if (/^\d+$/.test(rawToken)) return parseInt(rawToken); // Fallback se for número puro
+    if (rawToken.startsWith('v')) {
+        const hex = rawToken.substring(1);
+        const val = parseInt(hex, 16);
+        if (!isNaN(val)) {
+            const calculated = Math.round((val - 7) / 3);
+            return (calculated > 0 && calculated <= 20) ? calculated : 4;
+        }
+    }
+    return 4;
+}
+
+function initPersonalizedUrlParams() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const guestNameParam = urlParams.get('nome') || urlParams.get('n');
+    const rawPassesToken = urlParams.get('c') || urlParams.get('code') || urlParams.get('k') || urlParams.get('senhas');
+    const passesParam = parsePassesToken(rawPassesToken);
+
+    // 1. Personalizar a saudação no envelope e preencher nome
+    const personalizedPill = document.getElementById('personalized-greeting-pill');
+    const guestInput = document.getElementById('guest-name');
+
+    if (guestNameParam && guestNameParam.trim() !== '') {
+        const cleanName = guestNameParam.trim();
+        if (personalizedPill) {
+            personalizedPill.innerHTML = `<span class="pill-name-single-line">Olá, ${cleanName}!</span><span class="pill-sub-tag">CONVITE ESPECIAL</span>`;
+        }
+        if (guestInput) {
+            guestInput.value = cleanName;
+        }
+    }
+
+    // 2. Ajustar o controle de senhas/acompanhantes se houver parâmetro
+    const companionSelect = document.getElementById('companion-count');
+    const passesNotice = document.getElementById('passes-notice');
+
+    if (companionSelect && rawPassesToken) {
+        companionSelect.innerHTML = '';
+        
+        for (let i = 1; i <= passesParam; i++) {
+            const opt = document.createElement('option');
+            opt.value = i === 1 ? '1 pessoa (somente eu)' : `${i} pessoas`;
+            if (i === 1) {
+                opt.textContent = `Somente eu (1 senha)`;
+            } else if (i === passesParam) {
+                opt.textContent = `${i} pessoas (Limite de ${i} senhas liberadas)`;
+            } else {
+                opt.textContent = `${i} pessoas`;
+            }
+            companionSelect.appendChild(opt);
+        }
+
+        if (passesNotice) {
+            passesNotice.textContent = `🎟️ Convite liberado com até ${passesParam} senha(s) de entrada.`;
+        }
+    }
+}
+
+// --------------------------------------------------------------------------
+// 3. Contador Regressivo para 27/09/2026
 // --------------------------------------------------------------------------
 function startCountdown() {
     const daysEl = document.getElementById('timer-days');
@@ -88,7 +152,7 @@ function startCountdown() {
 }
 
 // --------------------------------------------------------------------------
-// 3. Abertura Motion Graphics & Gestão de Confirmação
+// 4. Abertura Motion Graphics & Gestão de Confirmação
 // --------------------------------------------------------------------------
 function setupMobileUXEventListeners() {
     const envelopeWrapper = document.getElementById('envelope-wrapper');
@@ -132,6 +196,10 @@ function setupMobileUXEventListeners() {
     const openRsvpBtnPageEnd = document.getElementById('open-rsvp-btn-page-end');
     const rsvpSheetOverlay = document.getElementById('rsvp-sheet-overlay');
     const rsvpForm = document.getElementById('rsvp-form');
+    const attendanceSelect = document.getElementById('attendance-status');
+    const companionSelect = document.getElementById('companion-count');
+    const companionGroup = document.getElementById('companion-form-group');
+    const submitBtn = document.getElementById('rsvp-submit-btn');
 
     function openRsvpDrawer() {
         if (rsvpSheetOverlay) rsvpSheetOverlay.classList.add('active');
@@ -148,15 +216,37 @@ function setupMobileUXEventListeners() {
         });
     }
 
-    // Formulário de Confirmação Profissional (Salva no Sistema e Envia para Nuvem/Sheets)
+    // 🌟 TOGGLE DINÂMICO: Quando escolhe "Infelizmente não poderei..."
+    if (attendanceSelect) {
+        attendanceSelect.addEventListener('change', () => {
+            const isDeclined = attendanceSelect.value === 'nao';
+
+            if (companionSelect) {
+                companionSelect.disabled = isDeclined;
+                if (companionGroup) {
+                    companionGroup.style.opacity = isDeclined ? '0.45' : '1';
+                    companionGroup.style.pointerEvents = isDeclined ? 'none' : 'auto';
+                }
+            }
+
+            if (submitBtn) {
+                if (isDeclined) {
+                    submitBtn.textContent = 'CONFIRMAR';
+                } else {
+                    submitBtn.textContent = 'Confirmar Minha Presença ✨';
+                }
+            }
+        });
+    }
+
+    // Formulário de Confirmação Profissional
     if (rsvpForm) {
         rsvpForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
             const name = document.getElementById('guest-name').value.trim();
             const status = document.getElementById('attendance-status').value;
-            const count = document.getElementById('companion-count').value;
-            const message = document.getElementById('guest-note').value.trim();
+            const count = status === 'sim' ? document.getElementById('companion-count').value : '0';
 
             if (!name) {
                 alert('Por favor, informe seu nome.');
@@ -167,7 +257,6 @@ function setupMobileUXEventListeners() {
                 name: name,
                 status: status,
                 count: count,
-                message: message,
                 date: new Date().toISOString()
             };
 
@@ -192,6 +281,9 @@ function setupMobileUXEventListeners() {
 
             // Limpar formulário
             rsvpForm.reset();
+            if (companionSelect) companionSelect.disabled = false;
+            if (companionGroup) companionGroup.style.opacity = '1';
+            if (submitBtn) submitBtn.textContent = 'Confirmar Minha Presença ✨';
         });
     }
 
@@ -203,7 +295,7 @@ function setupMobileUXEventListeners() {
 }
 
 // --------------------------------------------------------------------------
-// 4. Modal de Sucesso de Confirmação na Tela
+// 5. Modal de Sucesso de Confirmação na Tela
 // --------------------------------------------------------------------------
 function showRsvpSuccessModal(name, status) {
     let successModal = document.getElementById('rsvp-success-modal');
@@ -249,7 +341,7 @@ function showRsvpSuccessModal(name, status) {
 }
 
 // --------------------------------------------------------------------------
-// 5. Geração de Evento de Calendário
+// 6. Geração de Evento de Calendário
 // --------------------------------------------------------------------------
 function generateCalendarEvent() {
     const title = encodeURIComponent("80 Anos de Edileuza");

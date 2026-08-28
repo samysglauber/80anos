@@ -31,7 +31,7 @@
             <div id="envelope-wrapper" class="mobile-envelope-card">
                 
                 <div class="envelope-entry-block envelope-entry-d1">
-                    <span class="status-pill">Convite Especial</span>
+                    <span id="personalized-greeting-pill" class="status-pill">Convite Especial</span>
                 </div>
 
                 <div style="text-align: center; margin: 10px 0;">
@@ -94,7 +94,7 @@
                     </div>
                 </div>
 
-                <!-- Badge de Data Mobile (Sem o horário) -->
+                <!-- Badge de Data Mobile -->
                 <div id="section-info" class="motion-mask">
                     <div class="motion-block motion-d4">
                         <div class="date-mobile-badge">
@@ -136,7 +136,7 @@
             </article>
 
             <!-- ===============================================================
-                 🌟 CARD DE HORÁRIO E LOCALIZAÇÃO (RANCHO NUNES)
+                 🌟 CARD DE HORÁRIO E LOCALIZAÇÃO (MAPA CLICÁVEL DIRETO)
                  =============================================================== -->
             <div class="motion-mask">
                 <div class="motion-block motion-d6">
@@ -174,18 +174,14 @@
                             </div>
                         </div>
 
-                        <!-- Mini Mapa Container Luxo -->
-                        <div class="mini-map-container-lux">
-                            <iframe class="mini-map-iframe" src="https://maps.google.com/maps?q=-8.055,-34.890&z=15&output=embed" loading="lazy" allowfullscreen></iframe>
-                        </div>
-
-                        <!-- Botão Clean para Google Maps / Waze -->
-                        <a id="google-maps-link" href="https://maps.app.goo.gl/5xW69fM88n6KHjNq6" target="_blank" class="btn-maps-clean">
-                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                            </svg>
-                            <span>Abrir no Google Maps / Waze</span>
+                        <!-- 🗺️ Mapa 100% Clicável (Abre Rota Direta no Google Maps / Waze) -->
+                        <a id="google-maps-link" href="https://maps.app.goo.gl/5xW69fM88n6KHjNq6" target="_blank" style="text-decoration: none; display: block; position: relative;">
+                            <div class="mini-map-container-lux" style="cursor: pointer; margin-bottom: 5px;">
+                                <iframe class="mini-map-iframe" src="https://maps.google.com/maps?q=-8.055,-34.890&z=15&output=embed" loading="lazy" style="pointer-events: none;"></iframe>
+                                <div style="position: absolute; top: 10px; right: 10px; background: rgba(255,253,249,0.92); padding: 5px 12px; border-radius: 12px; border: 1px solid var(--gold-primary); font-size: 0.72rem; font-weight: 700; color: var(--gold-dark); box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 4px;">
+                                    📍 Toque no Mapa para Rota
+                                </div>
+                            </div>
                         </a>
 
                         <!-- Botão Adicionar à Agenda -->
@@ -200,15 +196,15 @@
             </div>
 
             <!-- ===============================================================
-                 📲 BOTÃO PRINCIPAL DE CONFIRMAÇÃO NO FIM DA PÁGINA
+                 📲 BOTÃO PRINCIPAL DE CONFIRMAÇÃO NO FIM DA PÁGINA (CLEAN)
                  =============================================================== -->
             <div class="motion-mask">
                 <div class="motion-block motion-d6" style="width: 100%; margin-top: 10px;">
                     <button id="open-rsvp-btn-page-end" class="btn-drawer-send" style="width: 100%; padding: 18px; font-size: 0.98rem; box-shadow: 0 10px 25px rgba(197, 160, 89, 0.45);">
-                        <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
-                        Confirmar Presença no WhatsApp
+                        Confirmar Presença
                     </button>
                 </div>
             </div>
@@ -229,8 +225,8 @@
         </button>
 
         <button id="open-rsvp-btn" class="nav-item-btn highlight">
-            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
             <span>Confirmar</span>
         </button>
@@ -244,7 +240,9 @@
             <div class="sheet-drag-handle"></div>
             
             <h3 class="drawer-title">Confirmar Presença</h3>
-            <p class="drawer-sub">Preencha seus dados para enviar direto no WhatsApp da família.</p>
+            <p id="passes-notice" class="drawer-sub" style="color: var(--gold-dark); font-weight: 500;">
+                Preencha seus dados para enviar direto no sistema da família.
+            </p>
 
             <form id="rsvp-form">
                 <div class="form-group">
@@ -260,7 +258,7 @@
                     </select>
                 </div>
 
-                <div class="form-group">
+                <div id="companion-form-group" class="form-group" style="transition: opacity 0.3s ease;">
                     <label for="companion-count" class="form-label">Acompanhantes (incluindo você)</label>
                     <select id="companion-count" class="form-select">
                         <option value="1 pessoa (somente eu)">Somente eu (1 pessoa)</option>
@@ -270,13 +268,8 @@
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <label for="guest-note" class="form-label">Mensagem Carinhosa para Edileuza (Opcional)</label>
-                    <textarea id="guest-note" class="form-textarea" rows="3" placeholder="Escreva um recado carinhoso..."></textarea>
-                </div>
-
-                <button type="submit" class="btn-drawer-send">
-                    Enviar Confirmação no WhatsApp 📲
+                <button id="rsvp-submit-btn" type="submit" class="btn-drawer-send">
+                    Confirmar Minha Presença ✨
                 </button>
             </form>
         </div>

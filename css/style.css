@@ -1,24 +1,37 @@
 /* ==========================================================================
-   CONVITE INTERATIVO 80 ANOS EDILEUZA - DESIGN MOBILE APP UX & MOTION GRAPHICS
-   Recursos: Animação de Entrada na Carga da Página, Botão de Abertura Luxo
+   CONVITE INTERATIVO 80 ANOS EDILEUZA - TEMA VERDE ESCURO & PALETA ESMERALDA
+   Design Mobile UX, Animação Motion Graphics & Destaques de Luxo
    ========================================================================== */
 
 :root {
-    --bg-main: #F8F5EF;
+    --bg-main: #F4F6F4;
     --bg-card: #FFFFFF;
-    --bg-glass: rgba(255, 255, 255, 0.88);
-    --gold-primary: #C5A059;
+    --bg-glass: rgba(255, 255, 255, 0.92);
+
+    /* Palette Verde Escuro Esmeralda */
+    --green-primary: #1B3B2B;
+    --green-dark: #0E2319;
+    --green-medium: #2A543E;
+    --green-light: #417357;
+    --green-soft-bg: rgba(27, 59, 43, 0.08);
+
+    /* Ouro Champagne para Detalhes Finos */
     --gold-accent: #D4AF37;
-    --gold-dark: #8A6721;
-    --gold-soft-bg: rgba(197, 160, 89, 0.08);
-    --gold-gradient: linear-gradient(135deg, #8A6721 0%, #D4AF37 40%, #F5E6AD 70%, #C5A059 100%);
-    --gold-gradient-btn: linear-gradient(135deg, #D4AF37 0%, #E8CF7A 50%, #C5A059 100%);
-    --text-primary: #231E1B;
-    --text-secondary: #58504A;
-    --text-muted: #8C847C;
-    --shadow-mobile: 0 12px 35px rgba(35, 30, 27, 0.07);
-    --shadow-float: 0 20px 45px rgba(184, 134, 11, 0.15);
-    --border-gold-subtle: 1px solid rgba(197, 160, 89, 0.35);
+    --gold-primary: #C5A059;
+    
+    /* Substituição de Variáveis Globais para o Tema Verde Escuro */
+    --gold-dark: #1B3B2B;
+    --gold-primary: #2A543E;
+    --gold-soft-bg: rgba(27, 59, 43, 0.08);
+    --gold-gradient: linear-gradient(135deg, #0E2319 0%, #1B3B2B 45%, #2E5A44 100%);
+    --gold-gradient-btn: linear-gradient(135deg, #1B3B2B 0%, #2E5A44 100%);
+
+    --text-primary: #14241B;
+    --text-secondary: #3B4F43;
+    --text-muted: #6B7E72;
+    --shadow-mobile: 0 12px 35px rgba(14, 35, 25, 0.07);
+    --shadow-float: 0 20px 45px rgba(27, 59, 43, 0.15);
+    --border-gold-subtle: 1px solid rgba(27, 59, 43, 0.22);
     
     --font-serif: 'Cormorant Garamond', 'Playfair Display', serif;
     --font-script: 'Pinyon Script', 'Great Vibes', cursive;
@@ -109,7 +122,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding: 32px 22px;
+    padding: 32px 14px;
     cursor: pointer;
     transition: transform 0.3s var(--ease-bounce);
 }
@@ -118,14 +131,19 @@ body {
     transform: scale(0.97);
 }
 
-/* 🌟 Animação de Entrada na Carga da Página (Page Load Entrance) */
+/* Animação de Entrada na Carga da Página */
 .envelope-entry-block {
     opacity: 0;
     transform: translateY(35px);
     animation: envelopeEntrance 0.85s var(--ease-spring) forwards;
 }
 
-.envelope-entry-d1 { animation-delay: 0.15s; }
+.envelope-entry-d1 { 
+    animation-delay: 0.15s; 
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 .envelope-entry-d2 { animation-delay: 0.32s; }
 .envelope-entry-d3 { animation-delay: 0.48s; }
 .envelope-entry-d4 { animation-delay: 0.64s; }
@@ -142,29 +160,47 @@ body {
 }
 
 .status-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 16px;
-    background: var(--gold-soft-bg);
-    border: 1px solid rgba(197, 160, 89, 0.3);
+    display: inline-block;
+    width: fit-content;
+    max-width: 95%;
+    padding: 8px 18px;
+    background: var(--green-soft-bg);
+    border: 1px solid rgba(27, 59, 43, 0.25);
     border-radius: 20px;
-    font-size: 0.72rem;
-    letter-spacing: 2px;
+    font-size: 0.73rem;
+    letter-spacing: 0.8px;
     text-transform: uppercase;
-    color: var(--gold-dark);
+    color: var(--green-primary);
     font-weight: 600;
+    text-align: center;
+    line-height: 1.35;
+    margin: 0 auto;
+}
+
+.pill-name-single-line {
+    white-space: nowrap;
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 0.6px;
+}
+
+.pill-sub-tag {
+    display: block;
+    font-size: 0.68rem;
+    letter-spacing: 2px;
+    margin-top: 2px;
+    white-space: nowrap;
 }
 
 .envelope-title-main {
     font-family: var(--font-script);
     font-size: 4.5rem;
-    color: var(--gold-dark);
+    color: var(--green-primary);
     line-height: 0.9;
     margin-top: 6px;
 }
 
-/* 🌟 NÚMERO "80" COLOSSAL E MAJESTOSO */
+/* NÚMERO "80" COLOSSAL EM GRADIENTE VERDE ESCURO ESMERALDA */
 .hero-age-container {
     display: flex;
     flex-direction: column;
@@ -182,7 +218,7 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: -3px;
-    filter: drop-shadow(0 6px 16px rgba(138, 103, 33, 0.22));
+    filter: drop-shadow(0 6px 16px rgba(27, 59, 43, 0.2));
 }
 
 .hero-age-sublabel {
@@ -191,21 +227,21 @@ body {
     font-weight: 700;
     letter-spacing: 8px;
     text-transform: uppercase;
-    color: var(--gold-dark);
+    color: var(--green-primary);
     margin-top: 4px;
-    border-top: 1.5px solid var(--gold-primary);
-    border-bottom: 1.5px solid var(--gold-primary);
+    border-top: 1.5px solid var(--green-primary);
+    border-bottom: 1.5px solid var(--green-primary);
     padding: 3px 18px;
 }
 
-/* 🌟 BOTÃO DE ABERTURA LUXO REFINADO (HIGH ELEGANCE OPEN BUTTON) */
+/* BOTÃO DE ABERTURA LUXO VERDE ESCURO */
 .tap-action-btn-lux {
     width: 100%;
     padding: 16px 20px;
-    background: rgba(255, 253, 248, 0.95);
-    border: 1.5px solid var(--gold-primary);
+    background: #FFFDF9;
+    border: 1.5px solid var(--green-primary);
     border-radius: 30px;
-    color: var(--gold-dark);
+    color: var(--green-primary);
     font-family: var(--font-sans);
     font-weight: 600;
     font-size: 0.82rem;
@@ -215,40 +251,16 @@ body {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    box-shadow: 0 8px 24px rgba(197, 160, 89, 0.18), inset 0 0 12px rgba(255, 255, 255, 0.8);
+    box-shadow: 0 8px 24px rgba(27, 59, 43, 0.15);
     transition: all 0.35s var(--ease-bounce);
     position: relative;
     overflow: hidden;
     cursor: pointer;
 }
 
-.tap-action-btn-lux::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-        60deg,
-        transparent 30%,
-        rgba(255, 255, 255, 0.6) 50%,
-        transparent 70%
-    );
-    transform: rotate(25deg) translateX(-100%);
-    animation: shimmerSweep 4.5s infinite ease-in-out;
-}
-
-@keyframes shimmerSweep {
-    0% { transform: rotate(25deg) translateX(-100%); }
-    25% { transform: rotate(25deg) translateX(100%); }
-    100% { transform: rotate(25deg) translateX(100%); }
-}
-
 .tap-action-btn-lux:active {
     transform: scale(0.96);
-    background: var(--gold-soft-bg);
-    border-color: var(--gold-dark);
+    background: var(--green-soft-bg);
 }
 
 .tap-action-btn {
@@ -257,7 +269,7 @@ body {
     background: var(--gold-gradient-btn);
     border: none;
     border-radius: 20px;
-    color: #3B2B0B;
+    color: #FFFFFF;
     font-weight: 700;
     font-size: 0.88rem;
     letter-spacing: 2px;
@@ -266,7 +278,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    box-shadow: 0 6px 18px rgba(197, 160, 89, 0.3);
+    box-shadow: 0 6px 18px rgba(27, 59, 43, 0.3);
     transition: transform 0.25s var(--ease-bounce);
 }
 
@@ -339,7 +351,7 @@ body {
 .hero-name-app {
     font-family: var(--font-script);
     font-size: 4.8rem;
-    color: var(--gold-dark);
+    color: var(--green-primary);
     line-height: 1;
     margin: -5px 0;
 }
@@ -355,21 +367,23 @@ body {
 
 .date-mobile-badge {
     margin: 22px 0 10px;
-    padding: 16px 20px;
-    background: var(--gold-soft-bg);
-    border: 1px solid rgba(197, 160, 89, 0.3);
+    padding: 16px 24px;
+    background: var(--green-soft-bg);
+    border: 1px solid rgba(27, 59, 43, 0.25);
     border-radius: 20px;
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 18px;
 }
 
 .date-day-big {
     font-family: var(--font-serif);
-    font-size: 2.8rem;
+    font-size: 3.8rem;
     font-weight: 700;
-    color: var(--gold-dark);
-    line-height: 0.9;
+    color: var(--green-primary);
+    line-height: 0.8;
+    margin-top: -6px;
 }
 
 .date-month-txt {
@@ -382,8 +396,8 @@ body {
 
 .timer-mobile-section {
     margin-top: 20px;
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(197, 160, 89, 0.25);
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(27, 59, 43, 0.22);
     border-radius: 20px;
     padding: 18px 12px;
 }
@@ -404,8 +418,8 @@ body {
 }
 
 .timer-item-box {
-    background: #FFFDF8;
-    border: 1px solid rgba(197, 160, 89, 0.3);
+    background: #FFFDF9;
+    border: 1px solid rgba(27, 59, 43, 0.22);
     border-radius: 12px;
     padding: 8px 2px;
 }
@@ -414,7 +428,7 @@ body {
     font-family: var(--font-serif);
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--gold-dark);
+    color: var(--green-primary);
     line-height: 1;
 }
 
@@ -440,7 +454,7 @@ body {
 
 .lux-card-header {
     text-align: center;
-    border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+    border-bottom: 1px solid rgba(27, 59, 43, 0.18);
     padding-bottom: 14px;
 }
 
@@ -461,7 +475,7 @@ body {
 
 .lux-info-box {
     background: #FFFDF9;
-    border: 1px solid rgba(197, 160, 89, 0.35);
+    border: 1px solid rgba(27, 59, 43, 0.22);
     border-radius: 20px;
     padding: 18px 14px;
     display: flex;
@@ -480,14 +494,14 @@ body {
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    background: var(--gold-soft-bg);
-    border: 1px solid rgba(197, 160, 89, 0.4);
-    color: var(--gold-dark);
+    background: var(--green-soft-bg);
+    border: 1px solid rgba(27, 59, 43, 0.3);
+    color: var(--green-primary);
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 10px;
-    box-shadow: 0 4px 12px rgba(184, 134, 11, 0.12);
+    box-shadow: 0 4px 12px rgba(27, 59, 43, 0.12);
 }
 
 .lux-info-label {
@@ -502,7 +516,7 @@ body {
     font-family: var(--font-serif);
     font-size: 1.65rem;
     font-weight: 700;
-    color: var(--gold-dark);
+    color: var(--green-primary);
     line-height: 1.1;
     margin-top: 4px;
 }
@@ -520,7 +534,7 @@ body {
     width: 100%;
     height: 180px;
     border-radius: 22px;
-    border: 1px solid rgba(197, 160, 89, 0.4);
+    border: 1px solid rgba(27, 59, 43, 0.3);
     overflow: hidden;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
 }
@@ -536,9 +550,9 @@ body {
     width: 100%;
     padding: 15px;
     background: #FFFDF9;
-    border: 1.5px solid var(--gold-primary);
+    border: 1.5px solid var(--green-primary);
     border-radius: 22px;
-    color: var(--gold-dark);
+    color: var(--green-primary);
     font-family: var(--font-sans);
     font-size: 0.83rem;
     font-weight: 700;
@@ -549,17 +563,17 @@ body {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    box-shadow: 0 4px 14px rgba(197, 160, 89, 0.12);
+    box-shadow: 0 4px 14px rgba(27, 59, 43, 0.12);
     transition: transform 0.25s ease, background 0.25s ease;
     margin-top: 5px;
 }
 
 .btn-maps-clean:active {
     transform: scale(0.97);
-    background: var(--gold-soft-bg);
+    background: var(--green-soft-bg);
 }
 
-/* Sticky Glass Bottom Navigation Bar (Dock Clean) */
+/* Sticky Glass Bottom Navigation Bar (Dock Clean Verde Escuro) */
 .mobile-bottom-nav {
     position: fixed;
     bottom: 18px;
@@ -568,12 +582,12 @@ body {
     width: calc(100% - 30px);
     max-width: 320px;
     height: 64px;
-    background: var(--bg-glass);
+    background: rgba(255, 253, 249, 0.94);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-radius: 35px;
-    border: 1px solid rgba(212, 175, 55, 0.35);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12), 0 0 20px rgba(197, 160, 89, 0.15);
+    border: 1px solid rgba(27, 59, 43, 0.3);
+    box-shadow: 0 15px 35px rgba(15, 35, 25, 0.14);
     z-index: 900;
     display: flex;
     align-items: center;
@@ -616,15 +630,15 @@ body {
 }
 
 .nav-item-btn.highlight {
-    background: var(--gold-gradient-btn);
-    color: #3B2B0B;
+    background: var(--green-primary);
+    color: #FFFFFF;
     padding: 8px 18px;
     border-radius: 25px;
-    box-shadow: 0 4px 14px rgba(197, 160, 89, 0.4);
+    box-shadow: 0 4px 14px rgba(27, 59, 43, 0.35);
 }
 
 .nav-item-btn.highlight svg {
-    color: #3B2B0B;
+    color: #FFFFFF;
 }
 
 /* Native Mobile Bottom-Sheet Drawer */
@@ -634,7 +648,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(35, 30, 27, 0.6);
+    background: rgba(14, 35, 25, 0.65);
     backdrop-filter: blur(8px);
     z-index: 1000;
     display: flex;
@@ -656,7 +670,7 @@ body {
     background: #FFFDF9;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
-    border-top: 1px solid rgba(197, 160, 89, 0.4);
+    border-top: 1px solid rgba(27, 59, 43, 0.3);
     box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.15);
     padding: 20px 24px 35px;
     transform: translateY(100%);
@@ -673,7 +687,7 @@ body {
 .sheet-drag-handle {
     width: 42px;
     height: 5px;
-    background: rgba(197, 160, 89, 0.35);
+    background: rgba(27, 59, 43, 0.25);
     border-radius: 3px;
     margin: 0 auto 18px;
 }
@@ -681,7 +695,7 @@ body {
 .drawer-title {
     font-family: var(--font-serif);
     font-size: 1.6rem;
-    color: var(--text-primary);
+    color: var(--green-primary);
     text-align: center;
     margin-bottom: 4px;
 }
@@ -711,7 +725,7 @@ body {
 .form-input, .form-select, .form-textarea {
     width: 100%;
     padding: 13px 15px;
-    border: 1px solid rgba(197, 160, 89, 0.4);
+    border: 1px solid rgba(27, 59, 43, 0.3);
     border-radius: 14px;
     background: #FAFAF7;
     font-family: var(--font-sans);
@@ -722,23 +736,23 @@ body {
 }
 
 .form-input:focus, .form-select:focus, .form-textarea:focus {
-    border-color: var(--gold-dark);
-    box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.18);
+    border-color: var(--green-primary);
+    box-shadow: 0 0 0 3px rgba(27, 59, 43, 0.15);
     background: #FFFFFF;
 }
 
 .btn-drawer-send {
     width: 100%;
     padding: 16px;
-    background: var(--gold-gradient-btn);
+    background: var(--green-primary);
     border: none;
     border-radius: 25px;
-    color: #3B2B0B;
+    color: #FFFFFF;
     font-weight: 700;
     font-size: 0.92rem;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    box-shadow: 0 8px 20px rgba(197, 160, 89, 0.4);
+    box-shadow: 0 8px 20px rgba(27, 59, 43, 0.35);
     cursor: pointer;
     display: flex;
     align-items: center;
