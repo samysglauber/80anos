@@ -1,0 +1,786 @@
+/* ==========================================================================
+   CONVITE INTERATIVO 80 ANOS EDILEUZA - DESIGN RÚSTICO CHIQUE (PALHA & VERDE ESCURO)
+   Fundo Verde Floresta Profundo, Detalhes em Palha Natural, Ráfia e Ouro Envelhecido
+   ========================================================================== */
+
+:root {
+    /* Fundo Verde Floresta Profundo Rústico */
+    --bg-main: #112419;
+    --bg-card: #183324;
+    --bg-glass: rgba(24, 51, 36, 0.94);
+
+    /* Paleta de Cores Inspirada em Palha Natural & Ráfia */
+    --straw-light: #F3E8D3;
+    --straw-primary: #D6C29B;
+    --straw-dark: #B59C6B;
+    --straw-accent: #947B49;
+    --straw-soft-bg: rgba(214, 194, 155, 0.12);
+
+    /* Texturas Vetoriais SVG Data-URI (Palha Trançada & Ráfia) */
+    --texture-woven-straw: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23D6C29B' fill-opacity='0.05' d='M0 0h12v12H0zm12 12h12v12H12z'/%3E%3Cpath fill='%23B59C6B' fill-opacity='0.03' d='M12 0h12v12H12zM0 12h12v12H0z'/%3E%3Cpath fill='none' stroke='%23D6C29B' stroke-opacity='0.07' stroke-width='0.7' stroke-dasharray='2,2' d='M0 4h24M0 12h24M0 20h24M4 0v24M12 0v24M20 0v24'/%3E%3C/svg%3E");
+    --texture-background-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath fill='none' stroke='%23D6C29B' stroke-opacity='0.05' stroke-width='0.8' d='M0 16h32M16 0v32M8 8l16 16M24 8L8 24'/%3E%3Ccircle cx='16' cy='16' r='1' fill='%23D6C29B' fill-opacity='0.08'/%3E%3C/svg%3E");
+
+    /* Gradiente em Palha Dourada & Ouro Envelhecido */
+    --straw-gradient: linear-gradient(135deg, #F8EEDC 0%, #D6C29B 45%, #AA905B 100%);
+    --straw-gradient-btn: linear-gradient(135deg, #D6C29B 0%, #C4B088 50%, #A89266 100%);
+
+    /* Substituição de Variáveis Globais */
+    --gold-dark: #D6C29B;
+    --gold-primary: #D6C29B;
+    --gold-soft-bg: rgba(214, 194, 155, 0.12);
+    --gold-gradient: linear-gradient(135deg, #F8EEDC 0%, #D6C29B 45%, #AA905B 100%);
+    --gold-gradient-btn: linear-gradient(135deg, #D6C29B 0%, #C4B088 50%, #A89266 100%);
+
+    --text-primary: #F5EFE6;
+    --text-secondary: #D2C7B5;
+    --text-muted: #9E9382;
+    --shadow-mobile: 0 14px 40px rgba(0, 0, 0, 0.35);
+    --shadow-float: 0 20px 48px rgba(0, 0, 0, 0.45);
+    --border-gold-subtle: 1.5px solid rgba(214, 194, 155, 0.35);
+    
+    --font-serif: 'Cormorant Garamond', 'Playfair Display', serif;
+    --font-script: 'Pinyon Script', 'Great Vibes', cursive;
+    --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+    
+    --ease-spring: cubic-bezier(0.2, 0.9, 0.3, 1);
+    --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+    /* Textura Rústica Vetorial de fundo */
+    background-image: var(--texture-background-grain);
+    background-size: 32px 32px;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 440px;
+    min-height: 100vh;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 15px 90px;
+}
+
+/* ==========================================================================
+   🎬 TELA 1: ENVELOPE INTERATIVO MOBILE (STYLE RÚSTICO PALHA)
+   ========================================================================== */
+.envelope-screen {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.envelope-screen.opened {
+    animation: motionEnvelopeSlide 0.75s var(--ease-spring) forwards;
+    pointer-events: none;
+}
+
+@keyframes motionEnvelopeSlide {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    40% {
+        transform: translateY(-20px) scale(1.02);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-120%) scale(0.95);
+    }
+}
+
+.mobile-envelope-card {
+    position: relative;
+    width: 325px;
+    height: 460px;
+    background-color: var(--bg-card);
+    background-image: var(--texture-woven-straw);
+    background-size: 24px 24px;
+    border-radius: 28px;
+    border: var(--border-gold-subtle);
+    box-shadow: var(--shadow-float);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 32px 14px;
+    cursor: pointer;
+    transition: transform 0.3s var(--ease-bounce);
+    /* Borda artesanal rústica pespontada */
+    outline: 1px dashed rgba(214, 194, 155, 0.35);
+    outline-offset: -8px;
+}
+
+.mobile-envelope-card:active {
+    transform: scale(0.97);
+}
+
+/* Animação de Entrada */
+.envelope-entry-block {
+    opacity: 0;
+    transform: translateY(35px);
+    animation: envelopeEntrance 0.85s var(--ease-spring) forwards;
+}
+
+.envelope-entry-d1 { 
+    animation-delay: 0.15s; 
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.envelope-entry-d2 { animation-delay: 0.32s; }
+.envelope-entry-d3 { animation-delay: 0.48s; }
+.envelope-entry-d4 { animation-delay: 0.64s; }
+
+@keyframes envelopeEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.status-pill {
+    display: inline-block;
+    width: fit-content;
+    max-width: 95%;
+    padding: 8px 18px;
+    background: var(--straw-soft-bg);
+    border: 1px solid var(--straw-primary);
+    border-radius: 20px;
+    font-size: 0.73rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--straw-primary);
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.35;
+    margin: 0 auto;
+}
+
+.pill-name-single-line {
+    white-space: nowrap;
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.8px;
+}
+
+.pill-sub-tag {
+    display: block;
+    font-size: 0.68rem;
+    letter-spacing: 2px;
+    margin-top: 2px;
+    white-space: nowrap;
+}
+
+.envelope-title-main {
+    font-family: var(--font-script);
+    font-size: 4.5rem;
+    color: var(--straw-primary);
+    line-height: 0.9;
+    margin-top: 6px;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* NÚMERO "80" COLOSSAL EM PALHA DOURADA */
+.hero-age-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4px;
+}
+
+.giant-age-num {
+    font-family: var(--font-serif);
+    font-size: 7.2rem;
+    font-weight: 700;
+    line-height: 0.8;
+    background: var(--straw-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -3px;
+    filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.5));
+}
+
+.hero-age-sublabel {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    color: var(--straw-primary);
+    margin-top: 4px;
+    border-top: 1.5px solid var(--straw-primary);
+    border-bottom: 1.5px solid var(--straw-primary);
+    padding: 3px 18px;
+}
+
+/* BOTÃO DE ABERTURA RÚSTICO EM PALHA DOURADA */
+.tap-action-btn-lux {
+    width: 100%;
+    padding: 16px 20px;
+    background: var(--straw-gradient);
+    border: none;
+    border-radius: 30px;
+    color: #112419;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 0.84rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+    transition: all 0.35s var(--ease-bounce);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.tap-action-btn-lux:active {
+    transform: scale(0.96);
+    filter: brightness(0.92);
+}
+
+.tap-action-btn {
+    width: 100%;
+    padding: 15px;
+    background: var(--straw-gradient-btn);
+    border: none;
+    border-radius: 20px;
+    color: #112419;
+    font-weight: 700;
+    font-size: 0.88rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+    transition: transform 0.25s var(--ease-bounce);
+}
+
+.tap-action-btn:active {
+    transform: scale(0.96);
+}
+
+/* ==========================================================================
+   MOTION GRAPHICS KINETIC TEXT & POSITION REVEAL
+   ========================================================================== */
+.invitation-screen {
+    width: 100%;
+    display: none;
+    opacity: 0;
+    transform: translateY(40px) scale(0.96);
+    transition: opacity 0.75s var(--ease-spring), transform 0.75s var(--ease-spring);
+}
+
+.invitation-screen.active {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.motion-mask {
+    overflow: hidden;
+    display: block;
+}
+
+.motion-block {
+    opacity: 0;
+    transform: translateY(100%);
+    will-change: opacity, transform;
+}
+
+.invitation-screen.active .motion-block {
+    animation: motionKineticReveal 0.85s var(--ease-spring) forwards;
+}
+
+@keyframes motionKineticReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.invitation-screen.active .motion-d1 { animation-delay: 0.10s; }
+.invitation-screen.active .motion-d2 { animation-delay: 0.22s; }
+.invitation-screen.active .motion-d3 { animation-delay: 0.34s; }
+.invitation-screen.active .motion-d4 { animation-delay: 0.46s; }
+.invitation-screen.active .motion-d5 { animation-delay: 0.58s; }
+.invitation-screen.active .motion-d6 { animation-delay: 0.70s; }
+
+.mobile-card {
+    background-color: var(--bg-card);
+    background-image: var(--texture-woven-straw);
+    background-size: 24px 24px;
+    border-radius: 28px;
+    border: var(--border-gold-subtle);
+    box-shadow: var(--shadow-mobile);
+    padding: 35px 22px;
+    text-align: center;
+    position: relative;
+    outline: 1px dashed rgba(214, 194, 155, 0.35);
+    outline-offset: -8px;
+}
+
+.hero-name-app {
+    font-family: var(--font-script);
+    font-size: 4.8rem;
+    color: var(--straw-primary);
+    line-height: 1;
+    margin: -5px 0;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.poetic-text-app {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.08rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 20px 10px;
+}
+
+.date-mobile-badge {
+    margin: 22px 0 10px;
+    padding: 16px 24px;
+    background: var(--straw-soft-bg);
+    border: 1px solid var(--straw-primary);
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+}
+
+.date-day-big {
+    font-family: var(--font-serif);
+    font-size: 3.8rem;
+    font-weight: 700;
+    color: var(--straw-primary);
+    line-height: 0.8;
+    margin-top: -6px;
+}
+
+.date-month-txt {
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.timer-mobile-section {
+    margin-top: 20px;
+    background: rgba(24, 51, 36, 0.85);
+    border: 1px solid rgba(214, 194, 155, 0.25);
+    border-radius: 20px;
+    padding: 18px 12px;
+}
+
+.timer-title {
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.timer-grid-mobile {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+}
+
+.timer-item-box {
+    background: rgba(17, 36, 25, 0.8);
+    border: 1px solid rgba(214, 194, 155, 0.3);
+    border-radius: 12px;
+    padding: 8px 2px;
+}
+
+.timer-num-val {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--straw-primary);
+    line-height: 1;
+}
+
+.timer-unit-lbl {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-top: 3px;
+    letter-spacing: 1px;
+}
+
+/* Card de Horário e Localização */
+.event-details-lux-card {
+    background-color: var(--bg-card);
+    background-image: var(--texture-woven-straw);
+    background-size: 24px 24px;
+    border-radius: 28px;
+    border: var(--border-gold-subtle);
+    box-shadow: var(--shadow-mobile);
+    padding: 28px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    outline: 1px dashed rgba(214, 194, 155, 0.35);
+    outline-offset: -8px;
+}
+
+.lux-card-header {
+    text-align: center;
+    border-bottom: 1px solid rgba(214, 194, 155, 0.2);
+    padding-bottom: 14px;
+}
+
+.lux-header-title {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--straw-primary);
+    font-weight: 600;
+}
+
+.lux-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.lux-info-box {
+    background: rgba(17, 36, 25, 0.7);
+    border: 1px solid rgba(214, 194, 155, 0.25);
+    border-radius: 20px;
+    padding: 18px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s var(--ease-bounce);
+}
+
+.lux-info-box:active {
+    transform: scale(0.97);
+}
+
+.lux-icon-badge {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--straw-soft-bg);
+    border: 1px solid var(--straw-primary);
+    color: var(--straw-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.lux-info-label {
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.lux-info-main-val {
+    font-family: var(--font-serif);
+    font-size: 1.65rem;
+    font-weight: 700;
+    color: var(--straw-primary);
+    line-height: 1.1;
+    margin-top: 4px;
+}
+
+.lux-info-sub {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
+    line-height: 1.3;
+}
+
+/* Mini Mapa Container Rústico */
+.mini-map-container-lux {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    border-radius: 22px;
+    border: 1px solid var(--straw-primary);
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+
+.mini-map-iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    filter: saturate(0.85) contrast(1.1);
+}
+
+.btn-maps-clean {
+    width: 100%;
+    padding: 15px;
+    background: var(--straw-gradient);
+    border: none;
+    border-radius: 22px;
+    color: #112419;
+    font-family: var(--font-sans);
+    font-size: 0.83rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+    transition: transform 0.25s ease;
+    margin-top: 5px;
+}
+
+.btn-maps-clean:active {
+    transform: scale(0.97);
+}
+
+/* Sticky Glass Bottom Navigation Bar (Dock Rústico em Palha & Verde) */
+.mobile-bottom-nav {
+    position: fixed;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 30px);
+    max-width: 320px;
+    height: 64px;
+    background: var(--bg-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 35px;
+    border: 1px solid var(--straw-primary);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 10px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.mobile-bottom-nav.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.nav-item-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 20px;
+    transition: all 0.25s ease;
+}
+
+.nav-item-btn svg {
+    margin-bottom: 2px;
+}
+
+.nav-item-btn:active {
+    transform: scale(0.92);
+}
+
+.nav-item-btn.highlight {
+    background: var(--straw-gradient-btn);
+    color: #112419;
+    padding: 8px 18px;
+    border-radius: 25px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.nav-item-btn.highlight svg {
+    color: #112419;
+}
+
+/* Native Mobile Bottom-Sheet Drawer Rústico */
+.bottom-sheet-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 22, 15, 0.75);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s var(--ease-spring);
+}
+
+.bottom-sheet-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.bottom-sheet-drawer {
+    width: 100%;
+    max-width: 440px;
+    background: #183324;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-top: 1.5px solid var(--straw-primary);
+    box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.5);
+    padding: 20px 24px 35px;
+    transform: translateY(100%);
+    transition: transform 0.45s var(--ease-spring);
+    position: relative;
+    max-height: 88vh;
+    overflow-y: auto;
+    outline: 1px dashed rgba(214, 194, 155, 0.2);
+    outline-offset: -8px;
+}
+
+.bottom-sheet-overlay.active .bottom-sheet-drawer {
+    transform: translateY(0);
+}
+
+.sheet-drag-handle {
+    width: 42px;
+    height: 5px;
+    background: var(--straw-primary);
+    border-radius: 3px;
+    margin: 0 auto 18px;
+}
+
+.drawer-title {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    color: var(--straw-primary);
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+.drawer-sub {
+    font-size: 0.84rem;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-bottom: 22px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+    text-align: left;
+}
+
+.form-label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--straw-primary);
+    margin-bottom: 6px;
+}
+
+.form-input, .form-select, .form-textarea {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid rgba(214, 194, 155, 0.35);
+    border-radius: 14px;
+    background: rgba(17, 36, 25, 0.8);
+    font-family: var(--font-sans);
+    font-size: 0.94rem;
+    color: var(--text-primary);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: var(--straw-primary);
+    box-shadow: 0 0 0 3px rgba(214, 194, 155, 0.2);
+    background: rgba(17, 36, 25, 0.95);
+}
+
+.btn-drawer-send {
+    width: 100%;
+    padding: 16px;
+    background: var(--straw-gradient-btn);
+    border: none;
+    border-radius: 25px;
+    color: #112419;
+    font-weight: 700;
+    font-size: 0.92rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+}

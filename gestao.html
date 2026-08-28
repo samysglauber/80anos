@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Painel de Gestão | 80 Anos de Edileuza</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-main: #112419;
+            --bg-card: #183324;
+            --gold-primary: #D6C29B;
+            --gold-dark: #D6C29B;
+            --gold-soft-bg: rgba(214, 194, 155, 0.12);
+            --text-primary: #F5EFE6;
+            --text-secondary: #D2C7B5;
+            --border-subtle: 1.5px solid rgba(214, 194, 155, 0.3);
+            --shadow-lux: 0 12px 35px rgba(0, 0, 0, 0.35);
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Montserrat', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            padding: 24px 16px 60px;
+            min-height: 100vh;
+        }
+
+        .dashboard-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Header Identidade Visual do Convite */
+        .dash-header {
+            background: var(--bg-card);
+            border-radius: 28px;
+            padding: 32px 24px 28px;
+            border: var(--border-subtle);
+            box-shadow: var(--shadow-lux);
+            margin-bottom: 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dash-header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+            background: var(--gold-primary);
+        }
+
+        .header-sublabel {
+            font-size: 0.78rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .header-name-main {
+            font-family: var(--font-serif);
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--gold-dark); /* Sólido sem gradiente */
+            margin: 2px 0 6px;
+            line-height: 1.1;
+        }
+
+        .header-age-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 14px;
+            background: #FFFDF9;
+            border: 1px solid var(--gold-primary);
+            border-radius: 20px;
+            margin-bottom: 8px;
+        }
+
+        .header-age-num {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--gold-dark);
+            line-height: 1;
+        }
+
+        .header-age-txt {
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            color: var(--gold-dark);
+            font-weight: 700;
+        }
+
+        .header-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Gerador de Links Personalizados (Sans-Serif) */
+        .link-generator-card {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 24px;
+            border: var(--border-subtle);
+            box-shadow: var(--shadow-lux);
+            margin-bottom: 24px;
+        }
+
+        .gen-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .gen-icon-badge {
+            width: 40px; height: 40px;
+            border-radius: 14px;
+            background: var(--gold-soft-bg);
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-dark);
+            flex-shrink: 0;
+        }
+
+        .gen-title {
+            font-family: var(--font-sans);
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.2px;
+        }
+
+        .gen-sub {
+            font-family: var(--font-sans);
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        .gen-form-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr auto;
+            gap: 12px;
+            align-items: center;
+        }
+
+        @media (max-width: 650px) {
+            .gen-form-grid { grid-template-columns: 1fr; }
+        }
+
+        .gen-input, .gen-select, .search-input, .filter-select {
+            padding: 14px;
+            border: 1.5px solid rgba(214, 194, 155, 0.35);
+            border-radius: 14px;
+            font-size: 0.9rem;
+            outline: none;
+            background-color: rgba(17, 36, 25, 0.9);
+            color: #F5EFE6;
+            font-family: var(--font-sans);
+            transition: all 0.2s ease;
+        }
+
+        .gen-input::placeholder, .search-input::placeholder {
+            color: #A89C8A;
+        }
+
+        .gen-select option, .filter-select option {
+            background-color: #183324;
+            color: #F5EFE6;
+            padding: 10px;
+        }
+
+        .gen-input:focus, .gen-select:focus, .search-input:focus, .filter-select:focus {
+            border-color: #D6C29B;
+            box-shadow: 0 0 0 3px rgba(214, 194, 155, 0.2);
+        }
+
+        .btn-gen-link {
+            padding: 14px 22px;
+            background: linear-gradient(135deg, #D6C29B 0%, #C4B088 50%, #A89266 100%);
+            border: none;
+            border-radius: 14px;
+            color: #112419;
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+            transition: transform 0.2s ease;
+        }
+
+        .btn-gen-link:active { transform: scale(0.98); }
+
+        .gen-result-box {
+            margin-top: 16px;
+            padding: 14px 18px;
+            background: rgba(214, 194, 155, 0.12);
+            border: 1px dashed #D6C29B;
+            border-radius: 14px;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .gen-result-url {
+            font-size: 0.82rem;
+            color: #D6C29B;
+            word-break: break-all;
+            font-weight: 600;
+            font-family: var(--font-sans);
+        }
+
+        .btn-copy-url {
+            padding: 9px 16px;
+            background: linear-gradient(135deg, #F8EEDC 0%, #D6C29B 100%);
+            border: none;
+            border-radius: 10px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #112419;
+            cursor: pointer;
+            white-space: nowrap;
+            font-family: var(--font-sans);
+        }
+
+        /* KPI Grid Moderno */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .kpi-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 22px;
+            border: var(--border-subtle);
+            box-shadow: var(--shadow-lux);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .kpi-num {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--gold-dark); /* Sólido sem gradiente */
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .kpi-label {
+            font-size: 0.76rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        /* Filters Bar Moderno */
+        .filters-card {
+            background: var(--bg-card);
+            border-radius: 18px;
+            padding: 16px 20px;
+            border: var(--border-subtle);
+            margin-bottom: 20px;
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 240px;
+        }
+
+        /* Tabela Elegante */
+        .table-card {
+            background: var(--bg-card);
+            border-radius: 24px;
+            border: var(--border-subtle);
+            box-shadow: var(--shadow-lux);
+            overflow: hidden;
+        }
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        th {
+            background: var(--gold-soft-bg);
+            padding: 16px 20px;
+            font-size: 0.74rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+            font-weight: 700;
+        }
+
+        td {
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            color: var(--text-primary);
+        }
+
+        tr:last-child td { border-bottom: none; }
+
+        .badge-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .badge-status.sim {
+            background: rgba(46, 125, 50, 0.35);
+            color: #81C784;
+            border: 1px solid #66BB6A;
+            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2);
+        }
+
+        .badge-status.nao {
+            background: rgba(211, 47, 47, 0.35);
+            color: #FF8A80;
+            border: 1px solid #EF5350;
+            box-shadow: 0 2px 8px rgba(244, 67, 54, 0.2);
+        }
+
+        .empty-state {
+            padding: 50px 20px;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 📊 Main Dashboard Clean sem Senha -->
+    <div class="dashboard-container">
+        
+        <!-- Header Identidade do Convite -->
+        <header class="dash-header">
+            <span class="header-sublabel">Celebração de</span>
+            <h1 class="header-name-main">Edileuza</h1>
+            <div class="header-age-badge">
+                <span class="header-age-num">80</span>
+                <span class="header-age-txt">ANOS</span>
+            </div>
+            <p class="header-desc">Painel de Controle de Presença & Portaria (Rancho Nunes)</p>
+        </header>
+
+        <!-- 🔗 GERADOR DE LINKS PERSONALIZADOS -->
+        <section class="link-generator-card">
+            <div class="gen-header">
+                <div class="gen-icon-badge">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="gen-title">Gerador de Convite Personalizado</h3>
+                    <p class="gen-sub">Crie um link exclusivo com o nome do convidado e a quantidade de senhas liberadas.</p>
+                </div>
+            </div>
+
+            <div class="gen-form-grid">
+                <input type="text" id="gen-guest-name" class="gen-input" placeholder="Nome do Convidado (Ex: João ou Cláudia)">
+                <select id="gen-passes-count" class="gen-select">
+                    <option value="1">1 Senha (Individual)</option>
+                    <option value="2">2 Senhas (Ele + 1)</option>
+                    <option value="3">3 Senhas (Família 3)</option>
+                    <option value="4" selected>4 Senhas (Família 4)</option>
+                    <option value="5">5 Senhas (Família 5)</option>
+                    <option value="6">6 Senhas (Família 6)</option>
+                </select>
+                <button id="btn-generate-link" class="btn-gen-link">
+                    Gerar Link 📲
+                </button>
+            </div>
+
+            <div id="gen-result-box" class="gen-result-box">
+                <span id="gen-result-url" class="gen-result-url"></span>
+                <button id="btn-copy-url" class="btn-copy-url">Copiar Link 📋</button>
+            </div>
+        </section>
+
+        <!-- KPI Grid Moderno -->
+        <section class="kpi-grid">
+            <div class="kpi-card">
+                <div id="kpi-total-guests" class="kpi-num">0</div>
+                <div class="kpi-label">Pessoas Confirmadas</div>
+            </div>
+            <div class="kpi-card">
+                <div id="kpi-confirmed-responses" class="kpi-num">0</div>
+                <div class="kpi-label">Convites Aceitos</div>
+            </div>
+            <div class="kpi-card">
+                <div id="kpi-declined" class="kpi-num">0</div>
+                <div class="kpi-label">Ausências</div>
+            </div>
+        </section>
+
+        <!-- Filters Bar Moderno -->
+        <div class="filters-card">
+            <input type="text" id="search-input" class="search-input" placeholder="🔍 Pesquisar convidado por nome...">
+            <select id="status-filter" class="filter-select">
+                <option value="all">Todos os Registros</option>
+                <option value="sim">Somente Confirmados (SIM)</option>
+                <option value="nao">Somente Ausências (NÃO)</option>
+            </select>
+        </div>
+
+        <!-- Table Elegante -->
+        <div class="table-card">
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome do Convidado</th>
+                            <th>Status</th>
+                            <th>Senhas / Acompanhantes</th>
+                            <th>Data/Hora da Resposta</th>
+                        </tr>
+                    </thead>
+                    <tbody id="guest-table-body">
+                        <!-- Dynamic content -->
+                    </tbody>
+                </table>
+            </div>
+            <div id="empty-state" class="empty-state">
+                Nenhuma resposta registrada ainda.<br>
+                <span style="font-size: 0.82rem; color: var(--gold-dark); font-weight: 500;">As confirmações dos convidados aparecerão aqui em tempo real.</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="config.js"></script>
+    <script>
+        let allGuestRecords = [];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadRecords(); // Acesso direto sem senha
+            setupDashboardActions();
+            setupLinkGenerator();
+        });
+
+        // Ofuscar o número de senhas em um código discreto (ex: 4 -> "v13", 2 -> "vd")
+        function obfuscatePasses(count) {
+            const num = parseInt(count) || 4;
+            const token = (num * 3 + 7).toString(16);
+            return `v${token}`;
+        }
+
+        // Gerador de Links Personalizados
+        function setupLinkGenerator() {
+            const btnGen = document.getElementById('btn-generate-link');
+            const inputName = document.getElementById('gen-guest-name');
+            const selectPasses = document.getElementById('gen-passes-count');
+            const resultBox = document.getElementById('gen-result-box');
+            const resultUrl = document.getElementById('gen-result-url');
+            const btnCopy = document.getElementById('btn-copy-url');
+
+            btnGen.addEventListener('click', () => {
+                const name = inputName.value.trim();
+                const passes = selectPasses.value;
+
+                if (!name) {
+                    alert('Por favor, digite o nome do convidado.');
+                    return;
+                }
+
+                let path = window.location.pathname.replace(/\/gestao(\.html)?\/?$/, '/index.html');
+                if (!path.includes('index.html')) {
+                    path = path.replace('gestao', 'index.html');
+                }
+                const baseUrl = window.location.origin + path;
+                const passesCode = obfuscatePasses(passes);
+                const generatedUrl = `${baseUrl}?nome=${encodeURIComponent(name)}&c=${passesCode}`;
+
+                resultUrl.textContent = generatedUrl;
+                resultBox.style.display = 'flex';
+
+                // Copiar automaticamente para a área de transferência
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(generatedUrl).then(() => {
+                        btnCopy.textContent = 'Copiado Automático! ✅';
+                        setTimeout(() => btnCopy.textContent = 'Copiar Link 📋', 2500);
+                    }).catch(() => {});
+                }
+            });
+
+            btnCopy.addEventListener('click', () => {
+                const url = resultUrl.textContent;
+                navigator.clipboard.writeText(url).then(() => {
+                    btnCopy.textContent = 'Copiado! ✅';
+                    setTimeout(() => btnCopy.textContent = 'Copiar Link 📋', 2000);
+                });
+            });
+        }
+
+        // Carregamento de Registros (localStorage + Google Sheets API)
+        function loadRecords() {
+            const localData = JSON.parse(localStorage.getItem('edileuza_rsvp_data') || '[]');
+            allGuestRecords = localData;
+
+            if (typeof EVENT_CONFIG !== 'undefined' && EVENT_CONFIG.googleSheetWebhookUrl) {
+                fetch(EVENT_CONFIG.googleSheetWebhookUrl)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (Array.isArray(data) && data.length > 0) {
+                            const sheetRecords = data.slice(1).map(row => ({
+                                date: row[0],
+                                name: row[1],
+                                status: row[2],
+                                count: row[3]
+                            }));
+                            allGuestRecords = sheetRecords;
+                        }
+                        renderDashboard();
+                    })
+                    .catch(() => renderDashboard());
+            } else {
+                renderDashboard();
+            }
+        }
+
+        // Renderização do Dashboard & Tabelas
+        function renderDashboard() {
+            const tbody = document.getElementById('guest-table-body');
+            const emptyState = document.getElementById('empty-state');
+            const searchVal = document.getElementById('search-input').value.toLowerCase().trim();
+            const filterVal = document.getElementById('status-filter').value;
+
+            tbody.innerHTML = '';
+
+            const filtered = allGuestRecords.filter(item => {
+                const matchesSearch = item.name.toLowerCase().includes(searchVal);
+                const matchesStatus = filterVal === 'all' || item.status === filterVal;
+                return matchesSearch && matchesStatus;
+            });
+
+            let totalConfirmedGuests = 0;
+            let confirmedResponses = 0;
+            let totalDeclined = 0;
+
+            allGuestRecords.forEach(item => {
+                if (item.status === 'sim') {
+                    confirmedResponses++;
+                    let parsedCount = parseInt(item.count) || 1;
+                    totalConfirmedGuests += parsedCount;
+                } else {
+                    totalDeclined++;
+                }
+            });
+
+            document.getElementById('kpi-total-guests').textContent = totalConfirmedGuests;
+            document.getElementById('kpi-confirmed-responses').textContent = confirmedResponses;
+            document.getElementById('kpi-declined').textContent = totalDeclined;
+
+            if (filtered.length === 0) {
+                emptyState.style.display = 'block';
+                return;
+            } else {
+                emptyState.style.display = 'none';
+            }
+
+            filtered.forEach(item => {
+                const tr = document.createElement('tr');
+                const formattedDate = item.date ? new Date(item.date).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : '-';
+                
+                tr.innerHTML = `
+                    <td style="font-weight: 600;">${escapeHtml(item.name)}</td>
+                    <td><span class="badge-status ${item.status}">${item.status === 'sim' ? '✓ Confirmado' : '✗ Ausente'}</span></td>
+                    <td style="font-weight: 500;">${item.status === 'sim' ? escapeHtml(item.count) : '-'}</td>
+                    <td style="font-size: 0.8rem; color: var(--text-secondary);">${formattedDate}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function setupDashboardActions() {
+            document.getElementById('search-input').addEventListener('input', renderDashboard);
+            document.getElementById('status-filter').addEventListener('change', renderDashboard);
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            return text.replace(/[&<>"']/g, function(m) {
+                return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
+            });
+        }
+    </script>
+</body>
+</html>
