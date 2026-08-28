@@ -519,7 +519,11 @@
                     return;
                 }
 
-                const baseUrl = window.location.origin + window.location.pathname.replace('gestao.html', 'index.html');
+                let path = window.location.pathname.replace(/\/gestao(\.html)?\/?$/, '/index.html');
+                if (!path.includes('index.html')) {
+                    path = path.replace('gestao', 'index.html');
+                }
+                const baseUrl = window.location.origin + path;
                 const passesCode = obfuscatePasses(passes);
                 const generatedUrl = `${baseUrl}?nome=${encodeURIComponent(name)}&c=${passesCode}`;
 
